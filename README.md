@@ -26,11 +26,20 @@ Valoracions extra:
 ## pasos a fer
 
 1. Arbre de decision a mà
-
 2. pasar caracterisitiques al matlab
-
 3. Fer experiments
-
 4. classificadors.
 
-   
+
+
+Per dijous:
+
+Descripcio de 
+
+Train1-> Victor
+
+Train2 -> Marcel
+
+Codi llegir al matlab -> Victor
+
+Pensar arbre de decisions-> els dos 
