@@ -12,3 +12,25 @@
    * Descripció de les funcions utilitzades, deixant ben clar quines són les implementades per vosaltres
    * Tot el software provinent d'altres fonts, ha d'estar correctament referenciat. EN CAS CONTRARI ES CONSIDERARÀ PLAGI.
    * Un annex amb tot el codi.
+
+Es valorarà:
+• Justificació de l'elecció dels descriptors i els classificadors
+• Qualitat dels descriptors utilitzats per a modelitzar els senyals.
+• Resultats obtinguts.
+• Rigor en l'experimentació. Presentació formal de resultats, usant els indicadors stàndard d'avaluació d’una classificació presentats al curs.
+
+Valoracions extra:
+• Un anàlisi de significància (i no-redundància) de les característiques emprades.
+• Afegir una classe reject ('desconegut') per detectar aquelles imatges que no pertanyin a cap de les 43 classes.
+
+## pasos a fer
+
+1. Arbre de decision a mà
+
+2. pasar caracterisitiques al matlab
+
+3. Fer experiments
+
+4. classificadors.
+
+   
