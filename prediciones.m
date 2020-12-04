@@ -5,10 +5,13 @@ name
 try
     
     %leer la imagen
-    %cargar el modelo en un archivo .mat
+    
+    %cargar el modelo de  modelX.mat
+    
     %dar la predicion
     
 catch
    fprintf('No existeix el archiu %s \n', name);
    
 end
+
