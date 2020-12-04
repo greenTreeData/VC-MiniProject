@@ -1,11 +1,11 @@
 
 prompt= 'Entra el nom de la imatge a predir: ';
-name=input(prompt, 's');
-name
+nameFile=input(prompt, 's');
+
 try
     
     %leer la imagen
-    
+    imread(name);
     %cargar el modelo de  modelX.mat
     
     %dar la predicion
