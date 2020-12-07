@@ -1,8 +1,9 @@
 try
-    load dataSetVars.mat;
+    load('calcs/dataSetVars.mat');
+    fprintf('Carregant el archiu de caracteristiques\n');
     
 catch ME
-    
+    fprintf('Inici del càlcul del vector de caracteristiques.\n');
     dsModels = imageDatastore("Models\Meta\*.png");
     ds = imageDatastore(["Train1\Train1\", "Train2\Train2\"], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
@@ -36,6 +37,6 @@ catch ME
         T = [T; d];
     end
     T.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
-    save dataSetVars.mat %guardamos si hemos entrado por el catch
+    save('calcs/dataSetVars.mat');%guardamos si hemos entrado por el catch
     
 end
