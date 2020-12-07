@@ -1,0 +1,4 @@
+getDataSet
+perm = randperm(10000,20);
+for i = 1:20
+    su

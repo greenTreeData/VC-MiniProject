@@ -16,6 +16,10 @@ catch ME
     ds = shuffle(ds);
 
     %splitDS:
+    
+    %numTrainFiles = 750;
+    %[imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
+    
     [train,test] = splitEachLabel(ds,0.8);
     nTrain = numel(train.Files);
     nTest = numel(test.Files);
