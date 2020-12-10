@@ -1,8 +1,9 @@
 try
-    load dataSetVars.mat;
+    load('calcs/dataSetVars.mat');
+    fprintf('Carregant el archiu de caracteristiques\n');
     
 catch ME
-    
+    fprintf('Inici del càlcul del vector de caracteristiques.\n');
     dsModels = imageDatastore("Models\Meta\*.png");
     ds = imageDatastore(["Train1\Train1\", "Train2\Train2\"], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
@@ -16,6 +17,10 @@ catch ME
     ds = shuffle(ds);
 
     %splitDS:
+    
+    %numTrainFiles = 750;
+    %[imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
+    
     [train,test] = splitEachLabel(ds,0.8);
     nTrain = numel(train.Files);
     nTest = numel(test.Files);
@@ -32,6 +37,6 @@ catch ME
         T = [T; d];
     end
     T.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
-    save dataSetVars.mat %guardamos si hemos entrado por el catch
+    save('calcs/dataSetVars.mat');%guardamos si hemos entrado por el catch
     
 end
