@@ -25,18 +25,28 @@ catch ME
     nTrain = numel(train.Files);
     nTest = numel(test.Files);
 
-    %calcularCaracteristicas
+    %calcularCaracteristicas train
     
     trainTransform = transform(train, @preProcesing);
     %montage({read(train), read(trainTransform)});
-    T = table;
+    TaulaTrain = table;
     %for n = 1:10
     for n = 1:numel(train.Files)
         [I,info] = read(trainTransform);
         d = calcCaracteristicas(info.Label, I);
-        T = [T; d];
+        TaulaTrain = [TaulaTrain; d];
     end
-    T.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
+    TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
+    
+    %calcularCaracterisiticas test
+    TaulaTest = table;
+    for n = 1:numel(test.Files)
+        [I,info] = read(trainTransform);
+        d = calcCaracteristicas(info.Label, I);
+        TaulaTest = [TaulaTest; d];
+    end
+    TaulaTest.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
+    
     save('calcs/dataSetVars.mat');%guardamos si hemos entrado por el catch
     
 end

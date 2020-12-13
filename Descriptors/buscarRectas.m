@@ -1,6 +1,5 @@
 %entra una imagen en RGB, salen las rectas encontradas por el algoritmo de
-%hough
-%por defecto, se buscan hasta 4 picos
+%hough. Por defecto, se buscan hasta 4 picos
 function rectas = buscarRectas(img, display, hPeaks)
 
     if nargin < 3
