@@ -1,4 +1,4 @@
-%Dada una <creo que imagen> añadimos los campos estadisticos:
+%Donada una imatge, la retornem preprocesada
 function data = preProcesing(data)
     targetSize = [100,200]; %funcion de ejemplo, de momento.
     data = imresize(data, targetSize);
