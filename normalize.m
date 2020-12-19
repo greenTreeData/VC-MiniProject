@@ -1,4 +1,4 @@
-function normalized = untitled(i)
+function normalized = normalize(i)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 a = min(i(:));  % a: buscar el min. valor dels pixels en totes les columnes
