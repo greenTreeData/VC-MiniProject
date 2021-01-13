@@ -1,20 +1,18 @@
-function tableRow = calcCaracteristicas(lable, img)
-% !!ATENCIÓN!! , si la imagen llega preprocessada -> viene en formato BW i
-% i calcColors no puede funcionar
-
-    %colors
-    
+function tableRow = calcCaracteristicas(lable, img, BW)
+    targetSize = [90,90]; %funcion de ejemplo, de momento.
+    BW = imresize(BW, targetSize);
+    img = imresize(img, targetSize);
+    %color
     [iRed, iBlue, iYellow, iWhite, iBlack] = calcColors(img);
     
     %circularitat
-    BW = preProcesing(img); % retorna la imatge en BW
-    
     stats = regionprops("table", BW,"all");
     [~,maxidx] = max(stats.Area);
     circularidad = stats.Circularity(maxidx);
     
     %hogs - necessita una extensió: Visual Computation 
-    [~,hogVisualization] = extractHOGFeatures(rgbNorm);
+    [features,~] = extractHOGFeatures(img);
+    tabl = array2table(features);
     
     %Paraleles
     paraleles = calcParaleles(img);
@@ -22,6 +20,8 @@ function tableRow = calcCaracteristicas(lable, img)
     %ocr
     txt = ocr(img);
     
+    
     %fer taula
-    tableRow = table(lable, iRed, iBlue, iYellow, iWhite, iBlack, circularidad, hogVisualization, paraleles, txt);
+    tableRow = table(lable, iRed, iBlue, iYellow, circularidad, paraleles, txt);
+    tableRow = [tableRow tabl];
 end
