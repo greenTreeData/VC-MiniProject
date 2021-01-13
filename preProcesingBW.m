@@ -1,5 +1,5 @@
 %Donada una imatge, la retornem preprocesada
-function [dataNormalized, BW] = preProcesing(data)  
+function [BW] = preProcesingBW(data)  
     dataNormalized = normalizeImage(data);
     normalize      = rgb2gray(dataNormalized);
     level          = graythresh(normalize);

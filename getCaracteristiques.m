@@ -5,8 +5,8 @@ try
 catch ME
     fprintf('Inici del càlcul del vector de caracteristiques.\n');
     dsModels = imageDatastore(['Models' filesep 'Meta' filesep '*.png']);
-    dir1 = convertCharsToStrings(['Train1' filesep 'Train1' filesep])
-    dir2 = convertCharsToStrings(['Train2' filesep 'Train2' filesep])
+    dir1 = convertCharsToStrings(['Train1' filesep 'Train1' filesep]);
+    dir2 = convertCharsToStrings(['Train2' filesep 'Train2' filesep]);
     ds = imageDatastore([dir1, dir2], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
 
@@ -37,9 +37,7 @@ catch ME
     %for n = 1:numel(train.Files)
         [Icolor,infoA] = read(trainTransformCOLOR);
         [Ibw, infoB] = read(trainTransformBW);
-        infoA
-        infoB
-        d = calcCaracteristicas(info.Label, I);
+        d = calcCaracteristicas(infoA.Label, Icolor, Ibw);
         TaulaTrain = [TaulaTrain; d];
     end
     TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
