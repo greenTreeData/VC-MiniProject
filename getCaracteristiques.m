@@ -4,8 +4,10 @@ try
     
 catch ME
     fprintf('Inici del càlcul del vector de caracteristiques.\n');
-    dsModels = imageDatastore(["Models" filesep "Meta" filesep "*.png"]);
-    ds = imageDatastore(["Train1" filesep "Train1" filesep, "Train2" filesep "Train2" filesep], "LabelSource","foldernames", "IncludeSubfolders",true);       
+    dsModels = imageDatastore(['Models' filesep 'Meta' filesep '*.png']);
+    dir1 = convertCharsToStrings(['Train1' filesep 'Train1' filesep])
+    dir2 = convertCharsToStrings(['Train2' filesep 'Train2' filesep])
+    ds = imageDatastore([dir1, dir2], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
 
     %podemos mirar cuantos items de cada clase hay y la distribución:
@@ -27,12 +29,16 @@ catch ME
 
     %calcularCaracteristicas train
     
-    trainTransform = transform(train, @preProcesing);
-    %montage({read(train), read(trainTransform)});
+    trainTransformCOLOR = transform(train, @preProcesingCOLOR);
+    trainTransformBW = transform(train, @preProcesingBW);
+    
     TaulaTrain = table;
-    %for n = 1:10
-    for n = 1:numel(train.Files)
-        [I,info] = read(trainTransform);
+    for n = 1:10
+    %for n = 1:numel(train.Files)
+        [Icolor,infoA] = read(trainTransformCOLOR);
+        [Ibw, infoB] = read(trainTransformBW);
+        infoA
+        infoB
         d = calcCaracteristicas(info.Label, I);
         TaulaTrain = [TaulaTrain; d];
     end
