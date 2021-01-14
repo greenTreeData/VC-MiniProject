@@ -4,9 +4,9 @@ try
     
 catch ME
     fprintf('Inici del càlcul del vector de caracteristiques.\n');
-    dsModels = imageDatastore(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Meta' filesep '*.png']);
-    dir1 = convertCharsToStrings(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Train1' filesep]);
-    dir2 = convertCharsToStrings(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Train2' filesep]);
+    dsModels = imageDatastore(['Models' filesep 'Meta' filesep '*.png']);
+    dir1 = convertCharsToStrings(['Train1' filesep 'Train1' filesep]);
+    dir2 = convertCharsToStrings(['Train2' filesep 'Train2' filesep]);
     ds = imageDatastore([dir1, dir2], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
 
@@ -24,33 +24,39 @@ catch ME
     %[imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
     
     [train,test] = splitEachLabel(ds,0.8);
-    nTrain = numel(train.Files);
-    nTest = numel(test.Files);
+    nTrain = numel(train.Files)
+    nTest = numel(test.Files)
 
     %calcularCaracteristicas train
     
     trainTransformCOLOR = transform(train, @preProcesingCOLOR);
     trainTransformBW = transform(train, @preProcesingBW);
     
-    TaulaTrain = table;
-    for n = 1:10
-    %for n = 1:numel(train.Files)
-        [Icolor,infoA] = read(trainTransformCOLOR);
-        [Ibw, infoB] = read(trainTransformBW);
-        d = calcCaracteristicas(infoA.Label, Icolor, Ibw);
-        TaulaTrain = [TaulaTrain; d];
-    end
+%     TaulaTrain = table;
+%     disp("start tablas")
+%     tic
+%     for n = 1:8000
+%         [Icolor,infoA] = read(trainTransformCOLOR);
+%         [Ibw, infoB] = read(trainTransformBW);
+%         d = calcCaracteristicas(infoA.Label, Icolor, Ibw);
+%         TaulaTrain = [TaulaTrain; d];    
+%     end
+%     elapsed = toc;
+%     disp(append("elapsed ", int2str(elapsed)))
+%     %guardamos si hemos entrado por el catch
+%     save(append("calcs", filesep, "taula.mat"));
    % TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
     
-    %calcularCaracterisiticas test
-%     TaulaTest = table;
-%     for n = 1:numel(test.Files)
-%         [I,info] = read(trainTransform);
-%         d = calcCaracteristicas(info.Label, I);
-%         TaulaTest = [TaulaTest; d];
-%     end
+    TaulaTest = table;
+    for n = 1:numel(test.Files)
+        [Icolor,infoA] = read(trainTransformCOLOR);
+        [Ibw, infoB] = read(trainTransformBW);
+        d = calcCaracteristicas(infoA.Label, Icolor, Ibw);  
+        TaulaTest = [TaulaTest; d];
+    end
+    save(append("calcs", filesep, "taula.mat"));
 %     TaulaTest.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
 %     
-    save(['calcs' filesep 'dataSetVars.mat']);%guardamos si hemos entrado por el catch
+    
     
 end

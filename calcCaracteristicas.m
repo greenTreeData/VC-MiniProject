@@ -1,27 +1,25 @@
 function tableRow = calcCaracteristicas(lable, img, BW)
-    targetSize = [90,90]; %funcion de ejemplo, de momento.
-    BW = imresize(BW, targetSize);
-    img = imresize(img, targetSize);
+    
     %color
-    [iRed, iBlue, iYellow, iWhite, iBlack] = calcColors(img);
+    [iRed, iBlue, iYellow] = calcColors(img);
     
     %circularitat
     stats = regionprops("table", BW,"all");
     [~,maxidx] = max(stats.Area);
     circularidad = stats.Circularity(maxidx);
     
+        
+    targetSize = [90,90];
+    img9090 = imresize(img, targetSize);
     %hogs - necessita una extensió: Visual Computation 
-    [features,~] = extractHOGFeatures(img);
+    [features,~] = extractHOGFeatures(img9090);
     tabl = array2table(features);
     
     %Paraleles
     paraleles = calcParaleles(img);
 
-    %ocr
-    txt = ocr(img);
-    
     
     %fer taula
-    tableRow = table(lable, iRed, iBlue, iYellow, circularidad, paraleles, txt);
+    tableRow = table(lable, iRed, iBlue, iYellow, circularidad, paraleles);
     tableRow = [tableRow tabl];
 end
