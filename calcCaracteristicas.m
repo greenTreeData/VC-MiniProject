@@ -1,4 +1,4 @@
-function tableRow = calcCaracteristicas(lable, img)
+function tableRow = calcCaracteristicas(lable, imgI, imgBW)
 % !!ATENCIÓN!! , si la imagen llega preprocessada -> viene en formato BW i
 % i calcColors no puede funcionar
 

@@ -40,6 +40,7 @@ catch ME
         d = calcCaracteristicas(infoA.Label, Icolor, Ibw);
         TaulaTrain = [TaulaTrain; d];
     end
+    %TODO : Variable names
     TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
     
     %calcularCaracterisiticas test
