@@ -4,9 +4,9 @@ try
     
 catch ME
     fprintf('Inici del càlcul del vector de caracteristiques.\n');
-    dsModels = imageDatastore(['Models' filesep 'Meta' filesep '*.png']);
-    dir1 = convertCharsToStrings(['Train1' filesep 'Train1' filesep]);
-    dir2 = convertCharsToStrings(['Train2' filesep 'Train2' filesep]);
+    dsModels = imageDatastore(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Meta' filesep '*.png']);
+    dir1 = convertCharsToStrings(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Train1' filesep]);
+    dir2 = convertCharsToStrings(['/Users/marcelcostaiamezquita/MATLAB/projects' filesep 'Train2' filesep]);
     ds = imageDatastore([dir1, dir2], "LabelSource","foldernames", "IncludeSubfolders",true);       
     nFiles = numel(ds.Files);
 
@@ -40,18 +40,17 @@ catch ME
         d = calcCaracteristicas(infoA.Label, Icolor, Ibw);
         TaulaTrain = [TaulaTrain; d];
     end
-    %TODO : Variable names
-    TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
+   % TaulaTrain.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
     
     %calcularCaracterisiticas test
-    TaulaTest = table;
-    for n = 1:numel(test.Files)
-        [I,info] = read(trainTransform);
-        d = calcCaracteristicas(info.Label, I);
-        TaulaTest = [TaulaTest; d];
-    end
-    TaulaTest.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
-    
+%     TaulaTest = table;
+%     for n = 1:numel(test.Files)
+%         [I,info] = read(trainTransform);
+%         d = calcCaracteristicas(info.Label, I);
+%         TaulaTest = [TaulaTest; d];
+%     end
+%     TaulaTest.Properties.VariableNames = {'Label' 'Atb1' 'Atb2' 'Atb3'};
+%     
     save(['calcs' filesep 'dataSetVars.mat']);%guardamos si hemos entrado por el catch
     
 end
