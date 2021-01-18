@@ -6,16 +6,21 @@ nameFile=input(prompt, 's');
 
 try
     %leer la imagen
-    imread(nameFile);
-    %cargar el modelo de modelX.mat
-    %load modelX.mat
-    
-    %predecir y dar resultado:
-    class = 1; %TODO: cambiar por la funcion de predecir del modelo
-    
-    fprintf('Classe : %s\n', numberToName(class));
+    i = imread(nameFile);
 catch
     fprintf('No existeix el archiu %s \n', nameFile);
    
 end
+
+%cargar el modelo de modelX.mat
+load taula.mat knnCosine
+
+%predecir y dar resultado:
+Icolor = preProcesingCOLOR(i);
+Ibw = preProcesingBW(i);
+taularCar = calcCaracteristicas("noLable", Icolor, Ibw);
+
+class = knnCosine.predictFcn(taularCar);
+
+fprintf('Classe : %s\n', numberToName(class));
 
